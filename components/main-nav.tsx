@@ -11,7 +11,7 @@ interface MainNavProps {
 
 export const MainNav = ({ data }: MainNavProps) => {
   const pathname = usePathname();
-  const routes = data.map(route => ({
+  const routes = data?.map(route => ({
     href: `/categories/${route.id}`,
     label: route.name,
     active: pathname === `/category/${route.id}`,

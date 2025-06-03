@@ -2,7 +2,6 @@
 
 import { Container } from "@/components/ui/container";
 import useCart from "@/hooks/use-cart";
-import { ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CartItem } from "./_components/cart-item";
 import { Summary } from "./_components/summary";
