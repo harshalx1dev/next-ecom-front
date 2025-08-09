@@ -3,6 +3,7 @@ import { Container } from "./ui/container";
 import { MainNav } from "./main-nav";
 import { getCategories } from "@/actions/get-categories";
 import { NavbarActions } from "./navbar-actions";
+import MobileNavbar from "@/components/mobile-navbar";
 
 export const revalidate = 0;
 
@@ -16,8 +17,13 @@ export const Navbar = async () => {
           <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
             <p className="font-bold text-xl">HMX1</p>
           </Link>
-          <MainNav data={categoriesData} />
+          <div className="hidden lg:block">
+            <MainNav data={categoriesData} />
+          </div>
           <NavbarActions />
+          <div className="block lg:hidden ml-4">
+            <MobileNavbar data={categoriesData} />
+          </div>
         </div>
       </Container>
     </div>

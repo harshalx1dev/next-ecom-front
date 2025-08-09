@@ -14,7 +14,7 @@ export const MainNav = ({ data }: MainNavProps) => {
   const routes = data?.map(route => ({
     href: `/categories/${route.id}`,
     label: route.name,
-    active: pathname === `/category/${route.id}`,
+    active: pathname === `/categories/${route.id}`,
   }))
 
   return (
