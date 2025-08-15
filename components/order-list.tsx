@@ -139,7 +139,7 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
                       <CardTitle className="text-lg font-semibold">
                         Order {order.id}
                       </CardTitle>
-                      <Badge variant={order.isPaid ? "default" : "destructive"}>
+                      <Badge variant={order.isPaid ? "success" : "destructive"}>
                         {order.isPaid ? "Paid" : "Unpaid"}
                       </Badge>
                     </div>
