@@ -51,4 +51,5 @@ export interface Order {
 export interface OrderItem {
   id: string;
   product: Product;
+  quantity: number;
 }

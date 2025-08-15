@@ -111,7 +111,7 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
     <div className="min-h-screen bg-background">
       {/* Main Content */}
       <div className="container mx-auto">
-        {!orders.length && (
+        {!orders.length ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <div className="rounded-full bg-muted p-6 mb-6">
               <ShoppingBag className="h-12 w-12 text-muted-foreground" />
@@ -120,7 +120,7 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
               No Orders Found
             </h2>
             <p className="text-muted-foreground mb-6 max-w-md">
-              You don&apos;t have any orders yet. When customers place orders,
+              You don&apos;t have any orders yet. When you place orders,
               they will appear here.
             </p>
             {/* <Button>
@@ -128,8 +128,8 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
               Create New Order
             </Button> */}
           </div>
-        )}
-        {orders.length && (
+        ) : <></>}
+        {orders.length ? (
           <div className="space-y-6">
             {orders.map((order) => (
               <Card key={order.id} className="overflow-hidden">
@@ -188,7 +188,7 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
                     </h3>
 
                     <div className="grid gap-4">
-                      {order.orderItems.map(({ product }, index) => (
+                      {order.orderItems.map(({ product, quantity }, index) => (
                         <div
                           key={index}
                           className="flex items-center gap-4 p-4 rounded-lg border border-border bg-card/50"
@@ -219,6 +219,12 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
                                 Color:{" "}
                                 <span className="text-foreground">
                                   {product.color?.name}
+                                </span>
+                              </span>
+                              <span className="text-muted-foreground">
+                                Quantity:{" "}
+                                <span className="text-foreground">
+                                  {quantity}
                                 </span>
                               </span>
                             </div>
@@ -254,7 +260,7 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
               </Card>
             ))}
           </div>
-        )}
+        ) : <></>}
       </div>
     </div>
   );
