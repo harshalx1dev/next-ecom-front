@@ -1,8 +1,15 @@
 import { getOrders } from "@/actions/get-orders";
 import OrderList from "@/components/order-list";
+import { Order } from "@/types";
 
 const OrdersPage = async () => {
-  const orders = await getOrders();
+  let orders: Order[] = [];
+
+  try {
+    orders = await getOrders();
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <div className="mx-auto max-w-7xl border-b border-border bg-card px-6 lg:px-8">
@@ -15,7 +22,7 @@ const OrdersPage = async () => {
           <div className="flex items-center gap-3"></div>
         </div>
       </div>
-      <OrderList orders={orders} />
+      <OrderList orders={orders || []} />
     </div>
   );
 };
