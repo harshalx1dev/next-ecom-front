@@ -7,8 +7,10 @@ const OrdersPage = async () => {
 
   try {
     orders = await getOrders();
+    console.log('Orders: ', orders);
+    
   } catch (error) {
-    console.log(error);
+    console.log('Orders Error: ', error);
   }
 
   return (

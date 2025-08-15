@@ -102,7 +102,7 @@ import Image from "next/image";
 const OrderList = ({ orders }: { orders: Order[] }) => {
   const calculateOrderTotal = (products: OrderItem[]) => {
     return products.reduce(
-      (total, { product }) => total + Number(product.price),
+      (total, { product, quantity }) => total + (Number(product.price) * Number(quantity)),
       0
     );
   };
@@ -230,14 +230,14 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
                             </div>
                             <div className="sm:hidden mt-2">
                               <p className="font-semibold text-lg text-foreground">
-                                ${product.price}
+                                ${Number(product.price).toFixed(2)}
                               </p>
                             </div>
                           </div>
 
                           <div className="hidden sm:block text-right flex-shrink-0">
                             <p className="font-semibold text-lg text-foreground">
-                              ${product.price}
+                              ${Number(product.price).toFixed(2)}
                             </p>
                           </div>
                         </div>
