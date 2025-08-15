@@ -25,7 +25,7 @@ export interface Product {
 export interface Image {
   id: string;
   url: string;
-} 
+}
 
 export interface Size {
   id: string;
@@ -37,4 +37,18 @@ export interface Color {
   id: string;
   name: string;
   value: string;
+}
+
+export interface Order {
+  id: string;
+  orderItems: OrderItem[];
+  isPaid: boolean;
+  phone: string;
+  address: string;
+  createdAt: string;
+}
+
+export interface OrderItem {
+  id: string;
+  product: Product;
 }

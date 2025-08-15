@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { CustomButton } from "@/components/ui/custom-button";
 import { IconButton } from "@/components/ui/icon-button";
 import { Color, Size } from "@/types";
 import { Dialog, DialogPanel } from "@headlessui/react";
@@ -20,10 +20,10 @@ export const MobileFilters = ({ colors, sizes }: MobileFiltersProps) => {
 
   return (
     <>
-      <Button onClick={onOpen} className="flex items-center gap-x-3 lg:hidden">
+      <CustomButton onClick={onOpen} className="flex items-center gap-x-3 lg:hidden">
         Filters
         <Plus size={20} />
-      </Button>
+      </CustomButton>
       <Dialog className="relative z-40 lg:hidden" as="div" open={open} onClose={onClose}>
         <div className="fixed inset-0 bg-black/25" />
 

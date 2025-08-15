@@ -2,7 +2,7 @@
 
 import { Product } from "@/types";
 import { Currency } from "./ui/currency";
-import { Button } from "./ui/button";
+import { CustomButton } from "./ui/custom-button";
 import { ShoppingCart } from "lucide-react";
 import useCart from "@/hooks/use-cart";
 import { MouseEventHandler } from "react";
@@ -42,10 +42,10 @@ export const Info = ({ product }: InfoProps) => {
         </div>
       </div>
       <div className="mt-10 flex items-center gap-x-3">
-        <Button className="flex items-center gap-x-2" onClick={onAddToCart}>
+        <CustomButton className="flex items-center gap-x-2" onClick={onAddToCart}>
           Add To Cart
           <ShoppingCart />
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { CustomButton } from "@/components/ui/custom-button";
 import { cn } from "@/lib/utils";
 import { Color, Size } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -44,7 +44,7 @@ export const Filter = ({ data, name, valueKey }: FilterProps) => {
       <div className="flex flex-wrap gap-2">
         {data.map((filter) => (
           <div key={filter.id} className="flex items-center">
-            <Button className={cn(`rounded-md text-small text-gray-800 p-2 bg-white border border-gray-300 cursor-pointer`, selectedValue === filter.id && 'bg-black text-white')} onClick={() => handleClick(filter.id)}>{filter.name}</Button>
+            <CustomButton className={cn(`rounded-md text-small text-gray-800 p-2 bg-white border border-gray-300 cursor-pointer`, selectedValue === filter.id && 'bg-black text-white')} onClick={() => handleClick(filter.id)}>{filter.name}</CustomButton>
           </div>
         ))}
       </div>
