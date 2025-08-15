@@ -8,6 +8,7 @@ import {
   CalendarDays,
   MapPin,
   Phone,
+  ShoppingBag,
   // MoreHorizontal,
 } from "lucide-react";
 // import {
@@ -110,20 +111,39 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
     <div className="min-h-screen bg-background">
       {/* Main Content */}
       <div className="container mx-auto">
-        <div className="space-y-6">
-          {orders.map((order) => (
-            <Card key={order.id} className="overflow-hidden">
-              <CardHeader className="bg-muted/50">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <CardTitle className="text-lg font-semibold">
-                      Order {order.id}
-                    </CardTitle>
-                    <Badge variant={order.isPaid ? "default" : "destructive"}>
-                      {order.isPaid ? "Paid" : "Unpaid"}
-                    </Badge>
-                  </div>
-                  {/* <DropdownMenu>
+        {!orders.length && (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="rounded-full bg-muted p-6 mb-6">
+              <ShoppingBag className="h-12 w-12 text-muted-foreground" />
+            </div>
+            <h2 className="text-2xl font-semibold text-foreground mb-2">
+              No Orders Found
+            </h2>
+            <p className="text-muted-foreground mb-6 max-w-md">
+              You don&apos;t have any orders yet. When customers place orders,
+              they will appear here.
+            </p>
+            {/* <Button>
+              <Package className="h-4 w-4 mr-2" />
+              Create New Order
+            </Button> */}
+          </div>
+        )}
+        {orders.length && (
+          <div className="space-y-6">
+            {orders.map((order) => (
+              <Card key={order.id} className="overflow-hidden">
+                <CardHeader className="bg-muted/50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <CardTitle className="text-lg font-semibold">
+                        Order {order.id}
+                      </CardTitle>
+                      <Badge variant={order.isPaid ? "default" : "destructive"}>
+                        {order.isPaid ? "Paid" : "Unpaid"}
+                      </Badge>
+                    </div>
+                    {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm">
                         <MoreHorizontal className="h-4 w-4" />
@@ -139,101 +159,102 @@ const OrderList = ({ orders }: { orders: Order[] }) => {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu> */}
-                </div>
-
-                {/* Order Info */}
-                <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mt-4">
-                  <div className="flex items-center gap-2">
-                    <CalendarDays className="h-4 w-4" />
-                    <span>
-                      {new Date(order.createdAt).toISOString().split("T")[0]}
-                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
-                    <span>{order.phone}</span>
+
+                  {/* Order Info */}
+                  <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mt-4">
+                    <div className="flex items-center gap-2">
+                      <CalendarDays className="h-4 w-4" />
+                      <span>
+                        {new Date(order.createdAt).toISOString().split("T")[0]}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Phone className="h-4 w-4" />
+                      <span>{order.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      <span className="truncate max-w-xs">{order.address}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span className="truncate max-w-xs">{order.address}</span>
-                  </div>
-                </div>
-              </CardHeader>
+                </CardHeader>
 
-              <CardContent className="p-6">
-                {/* Products */}
-                <div className="space-y-4">
-                  <h3 className="font-medium text-foreground mb-4">
-                    Products ({order.orderItems.length})
-                  </h3>
+                <CardContent className="p-6">
+                  {/* Products */}
+                  <div className="space-y-4">
+                    <h3 className="font-medium text-foreground mb-4">
+                      Products ({order.orderItems.length})
+                    </h3>
 
-                  <div className="grid gap-4">
-                    {order.orderItems.map(({ product }, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-4 p-4 rounded-lg border border-border bg-card/50"
-                      >
-                        <Image
-                          width={64}
-                          height={64}
-                          src={product.images?.[0]?.url}
-                          alt={product.name}
-                          className="w-16 h-16 rounded-md object-cover bg-muted flex-shrink-0"
-                        />
+                    <div className="grid gap-4">
+                      {order.orderItems.map(({ product }, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-4 p-4 rounded-lg border border-border bg-card/50"
+                        >
+                          <Image
+                            width={64}
+                            height={64}
+                            src={product.images?.[0]?.url}
+                            alt={product.name}
+                            className="w-16 h-16 rounded-md object-cover bg-muted flex-shrink-0"
+                          />
 
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-foreground truncate">
-                            {product.name}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">
-                            {product.category?.name}
-                          </p>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-2 text-sm">
-                            <span className="text-muted-foreground">
-                              Size:{" "}
-                              <span className="text-foreground">
-                                {product.size?.name}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-medium text-foreground truncate">
+                              {product.name}
+                            </h4>
+                            <p className="text-sm text-muted-foreground">
+                              {product.category?.name}
+                            </p>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-2 text-sm">
+                              <span className="text-muted-foreground">
+                                Size:{" "}
+                                <span className="text-foreground">
+                                  {product.size?.name}
+                                </span>
                               </span>
-                            </span>
-                            <span className="text-muted-foreground">
-                              Color:{" "}
-                              <span className="text-foreground">
-                                {product.color?.name}
+                              <span className="text-muted-foreground">
+                                Color:{" "}
+                                <span className="text-foreground">
+                                  {product.color?.name}
+                                </span>
                               </span>
-                            </span>
+                            </div>
+                            <div className="sm:hidden mt-2">
+                              <p className="font-semibold text-lg text-foreground">
+                                ${product.price}
+                              </p>
+                            </div>
                           </div>
-                          <div className="sm:hidden mt-2">
+
+                          <div className="hidden sm:block text-right flex-shrink-0">
                             <p className="font-semibold text-lg text-foreground">
                               ${product.price}
                             </p>
                           </div>
                         </div>
+                      ))}
+                    </div>
 
-                        <div className="hidden sm:block text-right flex-shrink-0">
-                          <p className="font-semibold text-lg text-foreground">
-                            ${product.price}
-                          </p>
-                        </div>
+                    {/* Order Total */}
+                    <div className="flex justify-end pt-4 border-t border-border">
+                      <div className="text-right">
+                        <p className="text-sm text-muted-foreground">
+                          Order Total
+                        </p>
+                        <p className="text-2xl font-bold text-primary">
+                          ${calculateOrderTotal(order.orderItems).toFixed(2)}
+                        </p>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Order Total */}
-                  <div className="flex justify-end pt-4 border-t border-border">
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">
-                        Order Total
-                      </p>
-                      <p className="text-2xl font-bold text-primary">
-                        ${calculateOrderTotal(order.orderItems).toFixed(2)}
-                      </p>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
